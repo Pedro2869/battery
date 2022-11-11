@@ -1,0 +1,160 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #050f35;
+}
+
+.charge {
+    position: relative;
+    width: 200px;
+    height: 350px;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, .3);
+}
+
+.charge::before {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 50px;
+    background-color: white;
+    position: absolute;
+    top: -50px;
+}
+
+.charge_wave {
+    position: relative;
+    height: 500px;
+    width: 500px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(10px)
+}
+
+.charge_wave::before, .charge_wave::after {
+    content: '';
+    display: block;
+    position: absolute;
+}
+
+.charge_wave::before {
+    height: 540px;
+    width: 600px;
+    background-color: #050f35;
+    border-radius: 40%;
+    animation: animate 20s linear infinite;
+}
+
+.charge_wave::after {
+    height: 600px;
+    width: 560px;
+    background-color: #050f35;
+    border-radius: 45%;
+    animation: animate 5s linear infinite;
+}
+
+.charge_bar {
+    height: 50%;
+    flex-shrink: 0;
+    width: 100%;
+    transition: all .3s;
+    background-color: lime;
+    animation: chargeBarAnimate 20s forwards;
+}
+
+.charge_size {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    animation: counter 20s forwards;
+    counter-reset: num var(--num);
+    font: 700 35px system-ui;
+    color: white;
+    z-index: 9;
+    letter-spacing: 5px;
+}
+
+.charge_size::after {
+    content: counter(num);
+}
+
+.charge_teeth {
+    padding: 3rem 2rem;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    opacity: .6;
+}
+
+.charge_teeth span {
+    display: block;
+    height: 65px;
+    background: rgba(255, 255, 255, .4);
+    border-radius: 5px;
+}
+
+@property --num {
+    syntax: "<integer>";
+    initial-value: 0;
+    inherits: false;
+}
+
+@keyframes counter {
+    0% {
+        --num: 0
+    }
+
+    50% {
+        --num: 100
+    }
+
+    0% {
+        --num: 0
+    }
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes chargeBarAnimate {
+    0% {
+        height: 0
+    }
+
+    50% {
+        height: 120%
+    }
+
+    100% {
+        height: 0;
+    }
+}
+
